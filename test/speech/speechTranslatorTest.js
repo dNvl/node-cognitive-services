@@ -18,15 +18,15 @@ describe.only('Speech translator', () => {
                 to: "en-US"
             };
 
+            // Todo implement this
             const body = fs.readFileSync('./test/assets/whatstheweatherlike.wav');
 
             client.translateSpeech({
                 parameters,
                 body
             }).then(response => {
-                console.log("Test response ...");
                 console.log(response);
-                should(response).not.be.undefined;
+                should(response).not.be.empty;
                 done();
             }).catch(err => {
                 console.log(err);

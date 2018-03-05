@@ -231,31 +231,29 @@ class speechTranslator extends commonService {
 
             // Handle a success in the connection
             ws.once('connect', (connection) => {
-                return new Promise((resolve, reject) => {
-                    connection.on('error', (error) => {
-                        console.log('Connection error ...');
-                        reject(error);
-                    });
-
-                    connection.on('close', (close) => {
-                        console.log('Connection closing ...');
-                        reject(close);
-                    });
-
-                    connection.on('message', (message) => {
-                        console.log('Message rec ... ');
-                        console.log(message);
-                        resolve(message);
-                    });
-
-                    if (connection.connected) {
-                        this.sendFileFromPath("./test/assets/whatstheweatherlike.wav", connection, function () {
-                            console.log("Req sent ...");
-                        });
-                    } else {
-                        reject(connection.connected);
-                    }
+                connection.on('error', (error) => {
+                    console.log('Connection error ...');
+                    reject(error);
                 });
+
+                connection.on('close', (close) => {
+                    console.log('Connection closing ...');
+                    reject(close);
+                });
+
+                connection.on('message', (message) => {
+                    console.log('Message rec ... ');
+                    resolve(message);
+                    connection.close();
+                });
+
+                if (connection.connected) {
+                    this.sendFileFromPath("./test/assets/whatstheweatherlike.wav", connection, function () {
+                        console.log("Req sent ...");
+                    });
+                } else {
+                    reject(connection.connected);
+                }
             });
 
             // Eventually try to establish a connection

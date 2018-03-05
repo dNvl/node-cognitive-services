@@ -89,6 +89,6 @@ module.exports = {
     },
     speechTranslator: {
         endpoint: "dev.microsofttranslator.com",
-        apiKey: "dfc20b29e6aa41c998e3d1677c9906b3"
+        apiKey: "insert-key-here"
     }
 }
