@@ -12,10 +12,10 @@ module.exports = {
         apiKey: "insert-key-here"
     },
     bingSearch: {
-        apiKey: "insert-key-here" 
+        apiKey: "insert-key-here"
     },
     bingSearchV7: {
-        apiKey: "insert-key-here" 
+        apiKey: "insert-key-here"
     },
     academicKnowledge: {
         endpoint: "westus.api.cognitive.microsoft.com",
@@ -86,5 +86,9 @@ module.exports = {
         apiKey: "insert-key-here",
         appID: "insert-appID-here",
         versionID: "0.1"
+    },
+    speechTranslator: {
+        endpoint: "dev.microsofttranslator.com",
+        apiKey: "dfc20b29e6aa41c998e3d1677c9906b3"
     }
 }

@@ -9,7 +9,7 @@ class commonService {
     }
 
     getIso3CodesForLanguages() {
-        return [ 'afr',
+        return ['afr',
             'sqi',
             'amh',
             'ara',
@@ -122,7 +122,7 @@ class commonService {
             'vie',
             'cym',
             'wol',
-            'yor'                    
+            'yor'
         ];
     }
 
@@ -137,9 +137,9 @@ class commonService {
         const parameters = data.parameters || {};
         const headers = data.headers || {};
         const body = data.body || null;
-    
+
         const contentTypeHeader = headers['Content-type'] || headers['Content-Type'] || "";
-    
+
         return verifyBody(operation.parameters, body, contentTypeHeader)
             .then(params => {
                 operation.parameters = params;
@@ -153,16 +153,16 @@ class commonService {
             })
             .then(() => {
                 headers['Ocp-Apim-Subscription-Key'] = this.apiKey;
-    
+
                 let path = operation.path;
-    
+
                 // mandatory route params
                 operation.parameters.forEach((param) => {
                     if (parameters[param.name] && param.type == 'routeParam') {
                         path = path.split(`{${param.name}}`).join(parameters[param.name]);
                     }
                 });
-    
+
                 // query params
                 let queryStringParams = {};
                 operation.parameters.forEach((param) => {
@@ -170,9 +170,9 @@ class commonService {
                         queryStringParams[param.name] = parameters[param.name];
                     }
                 });
-    
+
                 let uri = `https://${this.endpoint}/${path}`;
-    
+
                 var options = {
                     uri,
                     method: operation.method,
@@ -186,7 +186,7 @@ class commonService {
                         file: fs.createReadStream(parameters.path)
                     }
                 }
-    
+
                 else if (body != null) {
                     options.body = body;
                     if (contentTypeHeader && contentTypeHeader.indexOf('json') == -1) {
@@ -207,11 +207,15 @@ class commonService {
                         }
                         return body;
                     }
-    
+
                 }
                 return request(options);
             })
     }
+
+    // makeWebSocketRequest(data = {}) {
+
+    // }
 }
 
 module.exports = commonService;
